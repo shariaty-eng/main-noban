@@ -12,17 +12,29 @@ const Verification = () => {
 
 
     const [state, setState] = useState(initState)
+
     const validateCode = useRef();
     useEffect(() => {
         validateCode.current.focus();
     }, [])
 
+    const handlChange = (value) => {
+
+        let reg = new RegExp(/^[0-9\b]+$/);
+        if (!reg.test(value)) return;
+        setState((prevState) => ({
+            ...prevState,
+            validateCode: value,
+        }))
+    }
+
     const clearInput = () => {
         setState((prevState) => ({
             ...prevState,
-            validateCode: '',
+            validateCode: null,
         }))
     }
+
 
     return (
 
@@ -33,15 +45,13 @@ const Verification = () => {
             <div className="InputDigitNumber-container mt-4">
                 <PinInput
                     length={4}
-                    maxLength="1"
-                    minLength="1"
                     type="numeric"
                     inputMode="number"
                     ref={validateCode}
-                    //  initialValue={state.validateCode}
+                    // value={state.validateCode}
                     autoSelect={true}
                     name="validateCode"
-                    // onChange={handleCodeChange}
+                    onChange={handlChange}
                     inputStyle={{
                         background: '#f7f7f7',
                         boxShadow: "none",
@@ -56,7 +66,6 @@ const Verification = () => {
                         fontSize: "28px",
                         color: "#4d4d4d",
                     }}
-                    inputFocusStyle={{ background: '#f7f7f7' }}
                 />
             </div>
 
