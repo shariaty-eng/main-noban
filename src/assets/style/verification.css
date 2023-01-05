@@ -1,0 +1,59 @@
+.verification-segment {
+    width: 40%;
+    margin: 40px auto;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: inherit;
+    flex-direction: column;
+    -ms-flex-align: center;
+    -ms-flex-direction: column;
+    padding: 30px 15px;
+    border: 1px solid #c7c7c7;
+    border-radius: 8px;
+}
+
+.verification-segment .instruction {
+    font-weight: 500;
+    display: flex;
+    align-self: center;
+    justify-content: flex-start;
+    align-items: initial;
+
+
+}
+
+.verification-segment .description {
+    font-size: 14px;
+    font-size: .875rem;
+    font-weight: 600;
+    margin-top: 0.25em;
+    color: #4d4d4d;
+    display: inherit;
+    align-self: start;
+
+}
+
+.input_style {
+    border-radius: 8px;
+    border: none !important;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: black;
+    width: 100%;
+}
+
+
+.InputDigitNumber-container {
+    display: -ms-flexbox;
+    display: flex;
+    direction: ltr !important;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: justify;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
