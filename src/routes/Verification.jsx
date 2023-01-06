@@ -2,21 +2,44 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from 'react-icons/ai'
 import "../assets/style/verification.css"
 import DigitInput from "../component/DigitInput";
+import useKeyPress from "../hooks/useKeyPress"  
+import TextFieldModal from "../modals/TextFieldModal";
 
 const Verification = () => {
     const initState = {
         validateCode: {},
         validatePhone: 'correct phone number',
         clearInputFlag:false,
+        openDialogModal:false,
     }
 
     const [state, setState] = useState(initState)
 
     const validateCode = useRef();
+    const dialogModal = useRef();
+
     useEffect(() => {
         validateCode.current.focus();
     }, [])
 
+    const onKeyPress = (event) => {
+        if(event.keyCode == 113){
+            setState((prevState)=>({
+                ...prevState,
+                openDialogModal:true,
+            }))
+        }else if (event.keyCode == 114){
+            dialogModal.current.focus();
+        }
+      };
+    useKeyPress(['ctrlKey','shiftKey'], onKeyPress)
+
+    const closeModal=()=>{
+        setState((prevState)=>({
+            ...prevState,
+            openDialogModal:false,
+        }))
+    }
 
     const clearInput = () => {
         setState((prevState) => ({
@@ -68,6 +91,14 @@ const Verification = () => {
         />
 
       </div> */}
+
+{state.openDialogModal && 
+    <TextFieldModal
+    show={state.openDialogModal}
+    onChange={closeModal}
+    ref={dialogModal}
+    />
+}
 
         </div>
 
