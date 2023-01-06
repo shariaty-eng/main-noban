@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import PinInput from "react-pin-input";
 import { AiOutlineClose } from 'react-icons/ai'
 import "../assets/style/verification.css"
+import DigitInput from "../component/DigitInput";
 
 const Verification = () => {
-
     const initState = {
-        validateCode: null,
+        validateCode: {},
         validatePhone: 'correct phone number',
+        clearInputFlag:false,
     }
-
 
     const [state, setState] = useState(initState)
 
@@ -18,20 +17,11 @@ const Verification = () => {
         validateCode.current.focus();
     }, [])
 
-    const handlChange = (value) => {
-
-        let reg = new RegExp(/^[0-9\b]+$/);
-        if (!reg.test(value)) return;
-        setState((prevState) => ({
-            ...prevState,
-            validateCode: value,
-        }))
-    }
 
     const clearInput = () => {
         setState((prevState) => ({
             ...prevState,
-            validateCode: null,
+           clearInputFlag:!state.clearInputFlag,
         }))
     }
 
@@ -43,30 +33,26 @@ const Verification = () => {
                 Enter your 4 digits verification code
             </div>
             <div className="InputDigitNumber-container mt-4">
-                <PinInput
-                    length={4}
-                    type="numeric"
-                    inputMode="number"
+                <DigitInput
                     ref={validateCode}
-                    // value={state.validateCode}
-                    autoSelect={true}
-                    name="validateCode"
-                    onChange={handlChange}
-                    inputStyle={{
-                        background: '#f7f7f7',
-                        boxShadow: "none",
-                        border: "none",
-                        borderRadius: "4px",
-                        borderBottom: "1px solid #979797",
-                        boxSizing: "border-box",
-                        margin: "5px",
-                        height: "63px",
-                        width: "45px",
-                        textAlign: "center",
-                        fontSize: "28px",
-                        color: "#4d4d4d",
+                    value={state.validateCode}
+                    clearInputFlag={state.clearInputFlag}
+                    clearInputFunc={clearInput}
+                    onChange={(data) => {
+                        setState((prevState) => ({
+                            ...prevState,
+                            validateCode: {
+                                ...prevState.data,
+                                firstField: data.firstField,
+                                secondField: data.secondField,
+                                thirdField: data.thirdField,
+                                fourthField: data.fourthField,
+                            },
+                        }));
                     }}
                 />
+
+
             </div>
 
             <div className="d-flex flex-row justify-content-end align-items-center mt-4">
