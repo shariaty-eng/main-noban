@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './component/App';
 import reportWebVitals from './reportWebVitals';
 import './assets/bootstrap/css/bootstrap.min.css';
+import swDev from './swDev';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +13,8 @@ root.render(
   </React.StrictMode>
 
 );
+swDev()
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
